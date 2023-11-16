@@ -123,14 +123,14 @@ export default function data() {
     columns: [
       { Header: "Wager ID", accessor: "wagerID", align: "center" },
       { Header: "Sport", accessor: "sport", align: "center" },
-      { Header: "League", accessor: "league", align: "center" },
+      { Header: "League", accessor: "league", width: "50px", align: "center" },
       { Header: "Event Name", accessor: "eventName", align: "center" },
       { Header: "Market", accessor: "market", align: "center" },
       { Header: "Selected Option", accessor: "selectedOption", align: "center" },
       { Header: "Bet Placed", accessor: "betPlaced", align: "center" },
-      { Header: "Score", accessor: "scorewhen", align: "center" },
-      { Header: "Which half", accessor: "halfWhen", align: "center" },
-      { Header: "Event Timer", accessor: "eventTimer", align: "center" },
+      { Header: "Score", accessor: "scorewhen", width: "50px", align: "center" },
+      { Header: "Which half", accessor: "halfWhen", width: "50px", align: "center" },
+      { Header: "Event Timer", accessor: "eventTimer", width: "50px", align: "center" },
       { Header: "Feed Data", accessor: "feedData", align: "center" },
     ],
 
