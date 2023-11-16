@@ -28,11 +28,11 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
+import pendingWagersTableData from "layouts/tables/data/pendingWagersTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
 function Tables() {
-  const { columns, rows } = authorsTableData();
+  const { columns, rows } = pendingWagersTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
@@ -53,7 +53,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  Pending Wagers
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -80,7 +80,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Projects Table
+                  Graded Wagers
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
