@@ -23,6 +23,25 @@ export default function data() {
   const [rows, setRows] = useState([]);
   const getWagerData = () => {
     // const axios = require("axios");
+
+    let config1 = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "http://socket.betdata.pro:9595/events/50030074488/",
+      headers: {
+        "HTTP-X-API-KEY": "RwaU4mQfGuh67hEyzSe4I2fdcWSA1i02",
+      },
+    };
+
+    axios
+      .request(config1)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     let config = {
       method: "get",
       maxBodyLength: Infinity,
