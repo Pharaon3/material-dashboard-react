@@ -22,9 +22,10 @@ import React, { useState, useEffect } from "react";
 export default function data() {
   const [rows, setRows] = useState([]);
   let wagerData = [];
+  let soccerEventArray = [];
   const [feed, setFeed] = useState([]);
-  const [soccerEvent, setSoccerEvent] = useState(null);
-  const [soccerDetail, setSoccerDetail] = useState(null);
+  let soccerDetail = [];
+  let soccerEvent = [];
   const getWagerData = () => {
     // const axios = require("axios");
 
@@ -155,17 +156,20 @@ export default function data() {
     wagerData.map((row) => {
       let feedData = "" + row.feedData;
       const [feedId, feedEvent, feedSelection] = feedData.split("-");
+      const detailData = getDetailData(feedId);
       const eventData = getEventData(feedId);
+      const cCode = getCCode(feedEvent);
       switch (row.sport) {
         case "Soccer":
-          console.log("It's soccer game bet. Id is ", row.wagerID);
-          switch (feedEvent) {
-            case "1": // Moneyline - Who's winner in this game?
+          console.log("cCode: ", cCode);
+          // console.log("It's soccer game bet. Id is ", row.wagerID);
+          switch (cCode) {
+            case "ML": // Moneyline - Who's winner in this game?
               switch (feedSelection) {
-                case "1": // Bet Home team.
+                case "1": // Bet Home.
                   console.log("Bet Home");
-                  if (eventData?.d?.match?.status?.name == "Ended") {
-                    if (eventData?.d?.match?.result?.winner == "home") {
+                  if (detailData?.d?.match?.status?.name == "Ended") {
+                    if (detailData?.d?.match?.result?.winner == "home") {
                       console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
                     } else {
                       console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
@@ -176,8 +180,8 @@ export default function data() {
                   break;
                 case "2": // Bet Draw.
                   console.log("Bet Draw");
-                  if (eventData?.d?.match?.status?.name == "Ended") {
-                    if (eventData?.d?.match?.result?.winner == "draw") {
+                  if (detailData?.d?.match?.status?.name == "Ended") {
+                    if (detailData?.d?.match?.result?.winner == "draw") {
                       console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
                     } else {
                       console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
@@ -188,8 +192,8 @@ export default function data() {
                   break;
                 case "3": // Bet Away.
                   console.log("Bet Away.");
-                  if (eventData?.d?.match?.status?.name == "Ended") {
-                    if (eventData?.d?.match?.result?.winner == "away") {
+                  if (detailData?.d?.match?.status?.name == "Ended") {
+                    if (detailData?.d?.match?.result?.winner == "away") {
                       console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
                     } else {
                       console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
@@ -204,7 +208,7 @@ export default function data() {
               }
               break;
             default:
-              console.log("feedEvent: ", feedEvent);
+              // console.log("feedEvent: ", feedEvent);
               break;
           }
           break;
@@ -213,8 +217,14 @@ export default function data() {
       }
     });
   };
-  const getEventData = (feedId) => {
+  const getCCode = (feedEvent) => {
+    return soccerEventArray?.d?.m[feedEvent]?.c;
+  };
+  const getDetailData = (feedId) => {
     return soccerDetail;
+  };
+  const getEventData = (feedId) => {
+    return soccerEventArray;
   };
   useEffect(() => {
     getWagerData();
@@ -225,7 +235,7 @@ export default function data() {
         const data = await response.json();
 
         // Set the retrieved data in the state
-        setSoccerEvent(data);
+        soccerEventArray = data;
       } catch (error) {
         console.error("Error fetching JSON data:", error);
       }
@@ -237,7 +247,7 @@ export default function data() {
         const data = await response.json();
 
         // Set the retrieved data in the state
-        setSoccerDetail(data);
+        soccerDetail = data;
       } catch (error) {
         console.error("Error fetching JSON data:", error);
       }
@@ -268,7 +278,6 @@ export default function data() {
       { Header: "Event Timer", accessor: "eventTimer", width: "50px", align: "center" },
       { Header: "Feed Data", accessor: "feedData", align: "center" },
     ],
-
     rows,
   };
 }
