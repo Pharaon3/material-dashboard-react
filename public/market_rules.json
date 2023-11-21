@@ -1,0 +1,39 @@
+{
+  "Soccer": {
+    "ML": {
+      "common": {
+        "1": "c1 > c2",
+        "2": "c1 < c2",
+        "X": "c1 == c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      },
+      "H1": {
+        "isDetail": true,
+        "source": "http://62.112.8.78:9595/events/EVENT_ID/detailed-scores",
+        "check": "type = periodscore && name == \"1st half\"",
+        "scores": "c1 = periodscore.home, c2 = periodscore.away",
+        "p": "p.n != \"1st Half\" && cl.m > 45",
+        "path": "ps.1.score"
+      }
+    },
+    "TOTAL_GOALS_REGULAR_TIME": {
+      "common": {
+        "O": "(c1 + c2) > a",
+        "U": "(c1 + c2) < a",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    }
+  }
+}

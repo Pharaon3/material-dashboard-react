@@ -18,10 +18,12 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React components
 import MDTypography from "components/MDTypography";
 import axios from "axios";
+const math = require("mathjs");
 import React, { useState, useEffect } from "react";
 export default function data() {
   const [rows, setRows] = useState([]);
   let wagerData = [];
+  let market_rules = [];
   let soccerEventArray = [];
   const [feed, setFeed] = useState([]);
   let soccerDetail = [];
@@ -153,70 +155,141 @@ export default function data() {
       });
   };
   const getResult = () => {
+    console.log("market_rules: ", market_rules);
     wagerData.map((row) => {
       let feedData = "" + row.feedData;
       const [feedId, feedEvent, feedSelection] = feedData.split("-");
       const detailData = getDetailData(feedId);
       const eventData = getEventData(feedId);
       const cCode = getCCode(feedEvent);
-      switch (row.sport) {
-        case "Soccer":
-          console.log("cCode: ", cCode);
-          // console.log("It's soccer game bet. Id is ", row.wagerID);
-          switch (cCode) {
-            case "ML": // Moneyline - Who's winner in this game?
-              switch (feedSelection) {
-                case "1": // Bet Home.
-                  console.log("Bet Home");
-                  if (detailData?.d?.match?.status?.name == "Ended") {
-                    if (detailData?.d?.match?.result?.winner == "home") {
-                      console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
-                    } else {
-                      console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
-                    }
-                  } else {
-                    console.log("Cannot grade now.");
-                  }
-                  break;
-                case "2": // Bet Draw.
-                  console.log("Bet Draw");
-                  if (detailData?.d?.match?.status?.name == "Ended") {
-                    if (detailData?.d?.match?.result?.winner == "draw") {
-                      console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
-                    } else {
-                      console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
-                    }
-                  } else {
-                    console.log("Cannot grade now.");
-                  }
-                  break;
-                case "3": // Bet Away.
-                  console.log("Bet Away.");
-                  if (detailData?.d?.match?.status?.name == "Ended") {
-                    if (detailData?.d?.match?.result?.winner == "away") {
-                      console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
-                    } else {
-                      console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
-                    }
-                  } else {
-                    console.log("Cannot grade now.");
-                  }
-                  break;
-                default:
-                  console.log("Error: ", feedData);
-                  break;
-              }
-              break;
-            default:
-              // console.log("feedEvent: ", feedEvent);
-              break;
-          }
-          break;
-        default:
-          break;
+      const c1 = eventData?.d?.ps?.CS?.score?.c1;
+      const c2 = eventData?.d?.ps?.CS?.score?.c2;
+      const a = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.a?.[0];
+      const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c;
+      const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
+      console.log("Sport: ", row.sport, "commonCode: ", commonCode, "checkValue: ", checkValue);
+      const variables = { a: a, c1: c1, c2: c2 };
+      console.log("variables: ", variables);
+      if (checkValue) {
+        if (validateMathExpression(checkValue, variables)) {
+          if (eval(checkValue)) console.log("Bet Win!");
+          else console.log("Bet Lose!");
+        } else {
+          console.log("Not enough data feeded.");
+        }
+      } else {
+        console.log("Cannot grade.");
       }
+
+      // switch (row.sport) {
+      //   case "Soccer":
+      //     console.log("cCode: ", cCode);
+      //     switch (cCode) {
+      //       case "ML": // Moneyline - Who's winner in this game?
+      //         switch (feedSelection) {
+      //           case "1": // Bet Home.
+      //             console.log("Bet Home");
+      //             if (detailData?.d?.match?.status?.name == "Ended") {
+      //               if (detailData?.d?.match?.result?.winner == "home") {
+      //                 console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
+      //               } else {
+      //                 console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
+      //               }
+      //             } else {
+      //               console.log("Cannot grade now.");
+      //             }
+      //             break;
+      //           case "2": // Bet Draw.
+      //             console.log("Bet Draw");
+      //             if (detailData?.d?.match?.status?.name == "Ended") {
+      //               if (detailData?.d?.match?.result?.winner == "draw") {
+      //                 console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
+      //               } else {
+      //                 console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
+      //               }
+      //             } else {
+      //               console.log("Cannot grade now.");
+      //             }
+      //             break;
+      //           case "3": // Bet Away.
+      //             console.log("Bet Away.");
+      //             if (detailData?.d?.match?.status?.name == "Ended") {
+      //               if (detailData?.d?.match?.result?.winner == "away") {
+      //                 console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
+      //               } else {
+      //                 console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
+      //               }
+      //             } else {
+      //               console.log("Cannot grade now.");
+      //             }
+      //             break;
+      //           default:
+      //             console.log("Error: ", feedData);
+      //             break;
+      //         }
+      //         break;
+      //       case "TOTAL_GOALS_REGULAR_TIME": // Total Goals (Regular Time)
+      //         let rule = soccerEventArray?.d?.m[feedEvent]?.o[feedSelection]?.n;
+      //         let goals = soccerEventArray?.d?.m[feedEvent]?.o[feedSelection]?.a[0];
+      //         console.log(
+      //           "Total goals: ",
+      //           detailData?.d?.match?.result?.home + detailData?.d?.match?.result?.away
+      //         );
+      //         switch (rule) {
+      //           case "Over": // Win if total goal is over goals.
+      //             console.log("Bet Over " + goals);
+      //             if (detailData?.d?.match?.status?.name == "Ended") {
+      //               if (
+      //                 detailData?.d?.match?.result?.home + detailData?.d?.match?.result?.away >
+      //                 goals
+      //               ) {
+      //                 console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
+      //               } else {
+      //                 console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
+      //               }
+      //             } else {
+      //               console.log("Cannot grade now.");
+      //             }
+      //             break;
+      //           case "Under": // Win if total goal is under goals.
+      //             console.log("Bet Under " + goals);
+      //             if (detailData?.d?.match?.status?.name == "Ended") {
+      //               if (
+      //                 detailData?.d?.match?.result?.home + detailData?.d?.match?.result?.away <
+      //                 goals
+      //               ) {
+      //                 console.log("WIN BET!!!!!!!!!!!!!!!!!!!!!");
+      //               } else {
+      //                 console.log("LOSE BET!!!!!!!!!!!!!!!!!!!!");
+      //               }
+      //             } else {
+      //               console.log("Cannot grade now.");
+      //             }
+      //             break;
+      //           default:
+      //             console.log("Error: ", feedData);
+      //             break;
+      //         }
+      //         break;
+      //       default:
+      //         // console.log("feedEvent: ", feedEvent);
+      //         break;
+      //     }
+      //     break;
+      //   default:
+      //     break;
+      // }
     });
   };
+  function validateMathExpression(expression, variables) {
+    try {
+      const scope = { ...variables };
+      const result = math.evaluate(expression, scope);
+      return typeof result === "number" || typeof result === "boolean";
+    } catch (error) {
+      return false;
+    }
+  }
   const getCCode = (feedEvent) => {
     return soccerEventArray?.d?.m[feedEvent]?.c;
   };
@@ -228,13 +301,19 @@ export default function data() {
   };
   useEffect(() => {
     getWagerData();
+    const fetchMarketRules = async () => {
+      try {
+        const response = await fetch("./market_rules.json");
+        const data = await response.json();
+        market_rules = data;
+      } catch (error) {
+        console.error("Error fetching JSON data:", error);
+      }
+    };
     const fetchSoccerData = async () => {
       try {
-        // Fetch data from the JSON file
-        const response = await fetch("./footballEventData.json"); // Update the path accordingly
+        const response = await fetch("./footballEventData.json");
         const data = await response.json();
-
-        // Set the retrieved data in the state
         soccerEventArray = data;
       } catch (error) {
         console.error("Error fetching JSON data:", error);
@@ -242,11 +321,8 @@ export default function data() {
     };
     const fetchSoccerDetail = async () => {
       try {
-        // Fetch data from the JSON file
-        const response = await fetch("./footballDetail.json"); // Update the path accordingly
+        const response = await fetch("./footballDetail.json");
         const data = await response.json();
-
-        // Set the retrieved data in the state
         soccerDetail = data;
       } catch (error) {
         console.error("Error fetching JSON data:", error);
@@ -254,6 +330,7 @@ export default function data() {
     };
 
     // Call the fetchData function
+    fetchMarketRules();
     fetchSoccerData();
     fetchSoccerDetail();
   }, []);
