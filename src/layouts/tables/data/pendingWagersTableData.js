@@ -155,7 +155,6 @@ export default function data() {
       });
   };
   const getResult = () => {
-    console.log("market_rules: ", market_rules);
     wagerData.map((row) => {
       let feedData = "" + row.feedData;
       const [feedId, feedEvent, feedSelection] = feedData.split("-");
@@ -167,13 +166,11 @@ export default function data() {
       const a = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.a?.[0];
       const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c;
       const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
-      console.log("Sport: ", row.sport, "commonCode: ", commonCode, "checkValue: ", checkValue);
       const variables = { a: a, c1: c1, c2: c2 };
-      console.log("variables: ", variables);
       if (checkValue) {
         if (validateMathExpression(checkValue, variables)) {
-          if (eval(checkValue)) console.log("Bet Win!");
-          else console.log("Bet Lose!");
+          if (eval(checkValue)) console.log(checkValue, "Bet Win!");
+          else console.log(checkValue, "Bet Lose!");
         } else {
           console.log("Not enough data feeded.");
         }
