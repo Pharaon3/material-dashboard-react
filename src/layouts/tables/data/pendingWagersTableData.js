@@ -164,16 +164,19 @@ export default function data() {
       const c1 = eventData?.d?.ps?.CS?.score?.c1;
       const c2 = eventData?.d?.ps?.CS?.score?.c2;
       const a = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.a?.[0];
+      const p = eventData?.d?.p;
       const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c;
       const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
+      const pCode = market_rules[row.sport]?.[cCode]?.FULL?.p ?? "";
+      // console.log("pCode: ", pCode, "Result: ", eval(pCode));
       const variables = { a: a, c1: c1, c2: c2 };
-      if (checkValue) {
-        if (validateMathExpression(checkValue, variables)) {
-          if (eval(checkValue)) console.log(checkValue, "Bet Win!");
-          else console.log(checkValue, "Bet Lose!");
-        } else {
-          console.log("Not enough data feeded.");
-        }
+      if (checkValue && eval(pCode)) {
+        // if (validateMathExpression(checkValue, variables)) {
+        if (eval(checkValue)) console.log(checkValue, "Bet Win!");
+        else console.log(checkValue, "Bet Lose!");
+        // } else {
+        //   console.log("Not enough data feeded.", checkValue);
+        // }
       } else {
         console.log("Cannot grade.");
       }
@@ -281,7 +284,9 @@ export default function data() {
   function validateMathExpression(expression, variables) {
     try {
       const scope = { ...variables };
+      console.log("scope: ", scope);
       const result = math.evaluate(expression, scope);
+      console.log("result: ", result);
       return typeof result === "number" || typeof result === "boolean";
     } catch (error) {
       return false;
