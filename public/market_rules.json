@@ -61,6 +61,20 @@
         "path": "ps.CS.score"
       }
     },
+    "DOUBLE_CHANCE": {
+      "byId": {
+        "1": "c1 <= c2",
+        "2": "c1 != c2",
+        "3": "c1 >= c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",

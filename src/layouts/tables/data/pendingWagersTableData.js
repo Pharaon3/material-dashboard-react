@@ -166,7 +166,11 @@ export default function data() {
       const a = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.a?.[0];
       const p = eventData?.d?.p;
       const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c;
-      const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
+      const idCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.i;
+      const checkValue =
+        market_rules[row.sport]?.[cCode]?.common?.[commonCode] ??
+        market_rules[row.sport]?.[cCode]?.byId?.[idCode] ??
+        "";
       const pCode = market_rules[row.sport]?.[cCode]?.FULL?.p ?? "";
       // console.log("pCode: ", pCode, "Result: ", eval(pCode));
       const variables = { a: a, c1: c1, c2: c2 };
