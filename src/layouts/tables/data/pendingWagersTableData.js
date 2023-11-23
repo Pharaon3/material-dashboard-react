@@ -178,7 +178,7 @@ export default function data() {
         //   console.log("Not enough data feeded.", checkValue);
         // }
       } else {
-        console.log("Cannot grade.");
+        console.log("Cannot grade.", cCode);
       }
 
       // switch (row.sport) {
