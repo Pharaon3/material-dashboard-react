@@ -37,8 +37,8 @@
     },
     "BOTH_TEAMS_TO_SCORE": {
       "common": {
-        "Y": "c1 == c2",
-        "N": "c1 != c2",
+        "Y": "c1 > 0 && c2 > 0",
+        "N": "c1 == 0 || c2 == 0",
         "isDetailFlip": false
       },
       "FULL": {
@@ -62,10 +62,10 @@
       }
     },
     "DOUBLE_CHANCE": {
-      "byId": {
-        "1": "c1 <= c2",
-        "2": "c1 != c2",
-        "3": "c1 >= c2",
+      "common": {
+        "TIE_OR_$C1": "c1 == c2 || c1 > c1",
+        "$C1_OR_$C2": "c1 > c2 || c1 < c2",
+        "$C2_OR_TIE": "c2 > c1 || c2 == c2",
         "isDetailFlip": false
       },
       "FULL": {
