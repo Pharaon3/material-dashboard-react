@@ -360,6 +360,21 @@
         "path": "ps.1.score"
       }
     },
+    "EXACT_GOALS_HALF/H:1": {
+      "common": {
+        "1_GOAL": "(c1 + c2) == 1",
+        "NO_GOALS": "c1 + c2 == 0",
+        "2_GOAL": "(c1 + c2) == 2",
+        "3_GOALS_OR_MORE": "(c1 + c2) > 2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",
