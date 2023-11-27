@@ -75,14 +75,48 @@
         "path": "ps.CS.score"
       }
     },
-    "MONEYLINE/TOTAL:$G": {
+    "MONEYLINE/TOTAL:1.5": {
       "common": {
-        "$C1_WIN_AND_OVER_$G": "c1 > c2 && c1 > $G",
-        "$C1_WIN_AND_UNDER_$G": "c1 > c2 && c1 < $G",
-        "TIE_AND_OVER_$G": "c1 == c2 && c1 > $G",
-        "TIE_AND_UNDER_$G": "c1 == c2 && c1 < $G",
-        "$C2_WIN_AND_OVER_$G": "c2 > c1 && c2 > $G",
-        "$C2_WIN_AND_UNDER_$G": "c2 > c1 && c2 < $G",
+        "$C1_WIN_AND_OVER_1.5": "c1 > c2 && c1 > 1.5",
+        "$C1_WIN_AND_UNDER_1.5": "c1 > c2 && c1 < 1.5",
+        "TIE_AND_OVER_1.5": "c1 == c2 && c1 > 1.5",
+        "TIE_AND_UNDER_1.5": "c1 == c2 && c1 < 1.5",
+        "$C2_WIN_AND_OVER_1.5": "c2 > c1 && c2 > 1.5",
+        "$C2_WIN_AND_UNDER_1.5": "c2 > c1 && c2 < 1.5",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "MONEYLINE/TOTAL:2.5": {
+      "common": {
+        "$C1_WIN_AND_OVER_2.5": "c1 > c2 && c1 > 2.5",
+        "$C1_WIN_AND_UNDER_2.5": "c1 > c2 && c1 < 2.5",
+        "TIE_AND_OVER_2.5": "c1 == c2 && c1 > 2.5",
+        "TIE_AND_UNDER_2.5": "c1 == c2 && c1 < 2.5",
+        "$C2_WIN_AND_OVER_2.5": "c2 > c1 && c2 > 2.5",
+        "$C2_WIN_AND_UNDER_2.5": "c2 > c1 && c2 < 2.5",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "MONEYLINE/TOTAL:3.5": {
+      "common": {
+        "$C1_WIN_AND_OVER_3.5": "c1 > c2 && c1 > 3.5",
+        "$C1_WIN_AND_UNDER_3.5": "c1 > c2 && c1 < 3.5",
+        "TIE_AND_OVER_3.5": "c1 == c2 && c1 > 3.5",
+        "TIE_AND_UNDER_3.5": "c1 == c2 && c1 < 3.5",
+        "$C2_WIN_AND_OVER_3.5": "c2 > c1 && c2 > 3.5",
+        "$C2_WIN_AND_UNDER_3.5": "c2 > c1 && c2 < 3.5",
         "isDetailFlip": false
       },
       "FULL": {
