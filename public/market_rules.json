@@ -161,8 +161,8 @@
     },
     "TOTAL_TEAM_GOALS/C:1": {
       "common": {
-        "O": "c1 > $A",
-        "U": "c1 < $A",
+        "O": "c1 > a",
+        "U": "c1 < a",
         "isDetailFlip": false
       },
       "FULL": {
@@ -174,8 +174,8 @@
     },
     "TOTAL_TEAM_GOALS/C:2": {
       "common": {
-        "O": "c2 > $A",
-        "U": "c2 < $A",
+        "O": "c2 > a",
+        "U": "c2 < a",
         "isDetailFlip": false
       },
       "FULL": {
@@ -183,6 +183,122 @@
         "source": null,
         "p": "p.i > 249 && p.i < 256",
         "path": "ps.ET.score"
+      }
+    },
+    "EXACT_TEAM_TOTAL_GOALS": {
+      "common": {
+        "1/0": "c1 == 0",
+        "1/1": "c1 == 1",
+        "1/2": "c1 == 2",
+        "1/3": "c1 == 3",
+        "1/4+": "c1 > 3",
+        "2/0": "c2 == 0",
+        "2/1": "c2 == 1",
+        "2/2": "c2 == 2",
+        "2/3": "c2 == 3",
+        "2/4+": "c2 > 3",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "TEAM_TOTALS_OE": {
+      "common": {
+        "1/E": "!(c1 % 2)",
+        "2/E": "!(c2 % 2)",
+        "1/O": "(c1 % 2)",
+        "2/O": "(c2 % 2)",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "MONEYLINE_HALF_3W/H:1": {
+      "common": {
+        "1": "c1 > c2",
+        "X": "c1 == c2",
+        "2": "c1 < c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
+      }
+    },
+    "MONEYLINE_HALF_3W/H:2": {
+      "common": {
+        "1": "c1 > c2",
+        "X": "c1 == c2",
+        "2": "c1 < c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.2.score"
+      }
+    },
+    "TOTAL_OU/H:1": {
+      "common": {
+        "O": "(c1 + c2) > a",
+        "U": "(c1 + c2) < a",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
+      }
+    },
+    "CORRECT_SCORE_HALF/H:1": {
+      "common": {
+        "1:0": "c1 == 1 && c2 == 0",
+        "2:0": "c1 == 2 && c2 == 0",
+        "2:1": "c1 == 2 && c2 == 1",
+        "3:0": "c1 == 3 && c2 == 0",
+        "3:1": "c1 == 3 && c2 == 1",
+        "0:0": "c1 == 0 && c2 == 0",
+        "1:1": "c1 == 1 && c2 == 1",
+        "2:2": "c1 == 2 && c2 == 2",
+        "0:1": "c1 == 0 && c2 == 1",
+        "0:2": "c1 == 0 && c2 == 2",
+        "1:2": "c1 == 1 && c2 == 2",
+        "0:3": "c1 == 0 && c2 == 3",
+        "1:3": "c1 == 1 && c2 == 3",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
+      }
+    },
+    "TEAM_TO_SCORE_HALF/H:1": {
+      "common": {
+        "1/Y": "c1 > 0",
+        "2/Y": "c2 > 0",
+        "1/N": "c1 == 0",
+        "2/N": "c2 == 0",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
       }
     },
     "CORRECT_SCORE": {
