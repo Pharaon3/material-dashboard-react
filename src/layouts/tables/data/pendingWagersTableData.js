@@ -175,8 +175,7 @@ export default function data() {
       const p = eventData?.d?.p;
       const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c
         .replace("$C1", homeName)
-        .replace("$C2", awayName)
-        .replace("$A", a);
+        .replace("$C2", awayName);
       const idCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.i;
       const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
       // console.log("pCode: ", pCode, "Result: ", eval(pCode));
