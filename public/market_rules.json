@@ -333,6 +333,19 @@
         "path": "ps.2.score"
       }
     },
+    "TO_WIN_EITHER_HALF": {
+      "common": {
+        "1": "c1 > c2 || c1_H1 > c2_H1",
+        "2": "c2 > c1 || c2_H1 > c1_H1",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.2.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",
