@@ -163,18 +163,24 @@ export default function data() {
       const cCode = getCCode(feedEvent);
       const homeName = eventData?.d?.c1?.n.toUpperCase();
       const awayName = eventData?.d?.c2?.n.toUpperCase();
-      const c1 = eventData?.d?.ps?.CS?.score?.c1;
-      const c2 = eventData?.d?.ps?.CS?.score?.c2;
+      const pCode = market_rules[row.sport]?.[cCode]?.FULL?.p ?? "";
+      const path = market_rules[row.sport]?.[cCode]?.FULL?.path ?? "";
+      const c1 = getValueByPath(eventData?.d, path)?.c1;
+      const c2 = getValueByPath(eventData?.d, path)?.c2;
+      const c1_H1 = eventData?.d?.ps?.["1"]?.score?.c1;
+      const c2_H1 = eventData?.d?.ps?.["1"]?.score?.c2;
+      // const c1 = eventData?.d?.ps?.CS?.score?.c1;
+      // const c2 = eventData?.d?.ps?.CS?.score?.c2;
       const a = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.a?.[0];
       const p = eventData?.d?.p;
       const commonCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.c
         .replace("$C1", homeName)
-        .replace("$C2", awayName);
+        .replace("$C2", awayName)
+        .replace("$A", a);
       const idCode = eventData?.d?.m[feedEvent]?.o?.[feedSelection]?.i;
       const checkValue = market_rules[row.sport]?.[cCode]?.common?.[commonCode] ?? "";
-      const pCode = market_rules[row.sport]?.[cCode]?.FULL?.p ?? "";
       // console.log("pCode: ", pCode, "Result: ", eval(pCode));
-      const variables = { a: a, c1: c1, c2: c2 };
+      const variables = { a: a, c1: c1, c2: c2, c1_H1: c1_H1, c2_H1: c2_H1 };
       if (checkValue && eval(pCode)) {
         // if (validateMathExpression(checkValue, variables)) {
         if (eval(checkValue)) console.log(checkValue, "Bet Win!");
@@ -286,6 +292,19 @@ export default function data() {
       // }
     });
   };
+  function getValueByPath(data, path) {
+    const keys = path.split(".");
+    let value = data;
+
+    for (const key of keys) {
+      if (value.hasOwnProperty(key)) {
+        value = value[key];
+      } else {
+        return undefined;
+      }
+    }
+    return value;
+  }
   function validateMathExpression(expression, variables) {
     try {
       const scope = { ...variables };

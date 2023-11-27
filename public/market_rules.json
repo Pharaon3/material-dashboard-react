@@ -75,6 +75,82 @@
         "path": "ps.CS.score"
       }
     },
+    "MONEYLINE/TOTAL:$G": {
+      "common": {
+        "$C1_WIN_AND_OVER_$G": "c1 > c2 && c1 > $G",
+        "$C1_WIN_AND_UNDER_$G": "c1 > c2 && c1 < $G",
+        "TIE_AND_OVER_$G": "c1 == c2 && c1 > $G",
+        "TIE_AND_UNDER_$G": "c1 == c2 && c1 < $G",
+        "$C2_WIN_AND_OVER_$G": "c2 > c1 && c2 > $G",
+        "$C2_WIN_AND_UNDER_$G": "c2 > c1 && c2 < $G",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "HALF_TIME/FULL_TIME": {
+      "common": {
+        "$C1/$C1": "c1_H1 > c2_H1 && c1 > c2",
+        "$C1/$C2": "c1_H1 > c2_H1 && c1 < c2",
+        "$C1/TIE": "c1_H1 > c2_H1 && c1 == c2",
+        "TIE/TIE": "c1_H1 == c2_H1 && c1 == c2",
+        "TIE/$C1": "c1_H1 == c2_H1 && c1 > c2",
+        "TIE/$C2": "c1_H1 == c2_H1 && c1 < c2",
+        "$C2/TIE": "c1_H1 < c2_H1 && c1 == c2",
+        "$C2/$C2": "c1_H1 < c2_H1 && c1 < c2",
+        "$C2/$C1": "c1_H1 < c2_H1 && c1 > c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.CS.score"
+      }
+    },
+    "BOTH_TEAMS_TO_SCORE_EXTRA_TIME": {
+      "common": {
+        "Y": "c1 > 0 && c2 > 0",
+        "N": "c1 == 0 || c2 == 0",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.ET.score"
+      }
+    },
+    "TOTAL_TEAM_GOALS/C:1": {
+      "common": {
+        "O": "c1 > $A",
+        "U": "c1 < $A",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.ET.score"
+      }
+    },
+    "TOTAL_TEAM_GOALS/C:2": {
+      "common": {
+        "O": "c2 > $A",
+        "U": "c2 < $A",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.ET.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",
