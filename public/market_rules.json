@@ -409,6 +409,19 @@
         "path": "ps.1.score"
       }
     },
+    "TOTAL_GOALS_ODD/EVEN_HALF/H:2": {
+      "common": {
+        "EVEN": "!((c1 + c2) % 2)",
+        "ODD": "(c1 + c2) % 2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.2.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",
