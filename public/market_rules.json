@@ -343,7 +343,21 @@
         "isDetail": false,
         "source": null,
         "p": "p.i > 249 && p.i < 256",
-        "path": "ps.2.score"
+        "path": "ps.CS.score"
+      }
+    },
+    "DOUBLE_CHANCE_HALF/H:1": {
+      "common": {
+        "TIE_OR_$C2": "c1 <= c2",
+        "$C1_OR_TIE": "c1 >= c2",
+        "$C1_OR_$C2": "c1 != c2",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.1.score"
       }
     },
     "CORRECT_SCORE": {
