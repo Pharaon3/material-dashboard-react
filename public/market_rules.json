@@ -317,6 +317,22 @@
         "path": "ps.1.score"
       }
     },
+    "TOTAL_GOALS_BANDS_HALF/H:2": {
+      "common": {
+        "0-1": "(c1 + c2) < 1.5",
+        "1+": "(c1 + c2) > 0.5",
+        "0": "(c1 + c2)  == 0",
+        "2+": "(c1 + c2) > 1.5",
+        "3+": "(c1 + c2) > 2.5",
+        "isDetailFlip": false
+      },
+      "FULL": {
+        "isDetail": false,
+        "source": null,
+        "p": "p.i > 249 && p.i < 256",
+        "path": "ps.2.score"
+      }
+    },
     "CORRECT_SCORE": {
       "common": {
         "0:0": "c1 == 0 && c2 == 0",
